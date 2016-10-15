@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<script src="/js/bdr.js"></script>
+<html>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <link href="/css/bdr.css" rel="stylesheet" />
+        <ul class="tab">
+            <li><a href="#" class="tablinks" onclick="openTab(event, 'ReportType')">Report Type</a></li>
+            <li><a href="#" class="tablinks" onclick="openTab(event, 'Products')">Products</a></li>
+            <li><a href="#" class="tablinks" onclick="openTab(event, 'Sites')">Sites</a></li>
+            <li><a href="#" class="tablinks" onclick="openTab(event, 'Options')">Options</a></li>
+            <li><form name="test" >
+                    <input type="button" id="login" value="login" name="b1" onclick='disable_enable(this)'>
+                    <input type="button" id="logout" value="logout" name="b2" disabled  onclick='disable_enable(this)'>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <nav>
+        <div id="ReportType" class="tabcontent">
+            <h3>Report Type</h3>
+            <form>
+                <input type="radio" name="report">Product Penetration<br>
+                <input type="radio" name="report">Profitablity<br>
+                <input type="radio" name="report">Commonly sold together (apriori)<br>
+            </form>
+        </div>
+
+        <div id="Products" class="tabcontent">
+            <h3>Products</h3>
+            <table >
+                <tr>
+                    <td align="center">
+                        <p>Products</p>
+                        <select size="15" multiple >
+                            {{range .}}
+                            <option value="{{.}}"> {{.}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                        </select>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <p>Attribute 1</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td >
+                    <td></td>
+                    <td align="center">
+                        <p>Attribute 2</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td >
+                    <td></td>
+                    <td align="center">
+                        <p>Attribute 3</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <p>Attribute 4</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <p>Attribute 5</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Sites" class="tabcontent">
+            <h3>Sites</h3>
+            <table >
+                <tr>
+                    <td align="center">
+                        <p>Sites</p>
+                        <select size="15" multiple >
+                            <option value="site 1"> me</option>
+                            <option value="site2"> myself</option>
+                            <option value="site3"> wife</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <p>Region 1</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td >
+                    <td></td>
+                    <td align="center">
+                        <p>Region 2</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td >
+                    <td></td>
+                    <td align="center">
+                        <p>Region 3</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <p>Region 4</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <p>Region 5</p>
+                        <select size="15" multiple>
+                            <option>Att 1</option>
+                            <option>Att 2</option>
+                            <option>Att 3</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Options" class="tabcontent">
+            <h3>Options</h3>
+            <p>Options.</p>
+        </div>
+
+    </nav>
+    <footer>Copyright BDR.com</footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;BDR&gt;">
+    <CLASSES>
+      <root url="file://$USER_HOME$/goplayground/src/gopkg.in" />
+      <root url="file://$USER_HOME$/goplayground/src/honnef.co" />
+      <root url="file://$USER_HOME$/goplayground/src/github.com" />
+      <root url="file://$USER_HOME$/goplayground/src/golang.org" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$USER_HOME$/goplayground/src/gopkg.in" />
+      <root url="file://$USER_HOME$/goplayground/src/honnef.co" />
+      <root url="file://$USER_HOME$/goplayground/src/github.com" />
+      <root url="file://$USER_HOME$/goplayground/src/golang.org" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
