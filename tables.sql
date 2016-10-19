@@ -1,0 +1,247 @@
+
+DROP TABLE ProdCategory;
+
+DROP TABLE PCat5;
+
+DROP TABLE PCat4;
+
+DROP TABLE PCat3;
+
+DROP TABLE PCat2;
+
+DROP TABLE PCat1;
+
+DROP TABLE products;
+
+DROP TABLE StoreCategory;
+
+DROP TABLE SCat5;
+
+DROP TABLE SCat4;
+
+DROP TABLE SCat3;
+
+DROP TABLE SCat2;
+
+DROP TABLE SCat1;
+
+DROP TABLE Store;
+
+DROP TABLE TransactionItem;
+
+DROP TABLE TransactionHdr;
+
+CREATE TABLE PCat1
+(
+	CatID1               INTEGER NOT NULL,
+	Name                 VARCHAR(20) NULL
+);
+
+ALTER TABLE PCat1
+ADD CONSTRAINT XPKPCat1 PRIMARY KEY (CatID1);
+
+CREATE TABLE PCat2
+(
+	CatID2               INTEGER NOT NULL,
+	Name                 VARCHAR(20) NULL
+);
+
+ALTER TABLE PCat2
+ADD CONSTRAINT XPKPCat2 PRIMARY KEY (CatID2);
+
+CREATE TABLE PCat3
+(
+	CatID3               INTEGER NOT NULL,
+	Name                 VARCHAR(20) NULL
+);
+
+ALTER TABLE PCat3
+ADD CONSTRAINT XPKPCat3 PRIMARY KEY (CatID3);
+
+CREATE TABLE PCat4
+(
+	CatID4               INTEGER NOT NULL,
+	Name                 VARCHAR(20) NULL
+);
+
+ALTER TABLE PCat4
+ADD CONSTRAINT XPKPCat4 PRIMARY KEY (CatID4);
+
+CREATE TABLE PCat5
+(
+	CatID5               INTEGER NOT NULL,
+	Name                 VARCHAR(20) NULL
+);
+
+ALTER TABLE PCat5
+ADD CONSTRAINT XPKPCat5 PRIMARY KEY (CatID5);
+
+CREATE TABLE ProdCategory
+(
+	ProdID               INTEGER NOT NULL,
+	CatID1               INTEGER NOT NULL,
+	CatID2               INTEGER NOT NULL,
+	CatID3               INTEGER NOT NULL,
+	CatID4               INTEGER NOT NULL,
+	CatID5               INTEGER NOT NULL
+);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT XPKProdCategory PRIMARY KEY (ProdID,CatID1,CatID2,CatID3,CatID4,CatID5);
+
+CREATE TABLE products
+(
+	ProdID               INTEGER NOT NULL,
+	ProdDesc             VARCHAR(2000) NULL,
+	TransactionID        BIGINT NULL,
+	LineNumber           INTEGER NULL
+);
+
+ALTER TABLE products
+ADD CONSTRAINT XPKproducts PRIMARY KEY (ProdID);
+
+CREATE TABLE SCat1
+(
+	SCatID1              INTEGER NOT NULL,
+	Name                 VARCHAR(50) NULL
+);
+
+ALTER TABLE SCat1
+ADD CONSTRAINT XPKSCat1 PRIMARY KEY (SCatID1);
+
+CREATE TABLE SCat2
+(
+	SCatID2              INTEGER NOT NULL,
+	Name                 VARCHAR(50) NULL
+);
+
+ALTER TABLE SCat2
+ADD CONSTRAINT XPKSCat2 PRIMARY KEY (SCatID2);
+
+CREATE TABLE SCat3
+(
+	SCatID3              INTEGER NOT NULL,
+	Name                 VARCHAR(50) NULL
+);
+
+ALTER TABLE SCat3
+ADD CONSTRAINT XPKSCat3 PRIMARY KEY (SCatID3);
+
+CREATE TABLE SCat4
+(
+	SCatID4              INTEGER NOT NULL,
+	Name                 VARCHAR(50) NULL
+);
+
+ALTER TABLE SCat4
+ADD CONSTRAINT XPKSCat4 PRIMARY KEY (SCatID4);
+
+CREATE TABLE SCat5
+(
+	SCatID5              INTEGER NOT NULL,
+	Name                 VARCHAR(50) NULL
+);
+
+ALTER TABLE SCat5
+ADD CONSTRAINT XPKSCat5 PRIMARY KEY (SCatID5);
+
+CREATE TABLE Store
+(
+	StoreID              INTEGER NOT NULL,
+	Address              VARCHAR(20) NULL,
+	City                 VARCHAR(20) NULL,
+	State                VARCHAR(20) NULL,
+	Zip                  VARCHAR(20) NULL,
+	Country              VARCHAR(20) NULL,
+	TransactionID        BIGINT NULL,
+	LineNumber           INTEGER NULL
+);
+
+ALTER TABLE Store
+ADD CONSTRAINT XPKStore PRIMARY KEY (StoreID);
+
+CREATE TABLE StoreCategory
+(
+	StoreID              INTEGER NOT NULL,
+	SCatID1              INTEGER NOT NULL,
+	SCatID2              INTEGER NOT NULL,
+	SCatID3              INTEGER NOT NULL,
+	SCatID4              INTEGER NOT NULL,
+	SCatID5              INTEGER NOT NULL
+);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT XPKStoreCategory PRIMARY KEY (StoreID,SCatID1,SCatID2,SCatID3,SCatID4,SCatID5);
+
+CREATE TABLE TransactionHdr
+(
+	TransactionID        BIGINT NOT NULL,
+	DateTime             DATETIME NULL,
+	StoreID              INTEGER NULL,
+	channelCode          INTEGER NULL,
+	price                DECIMAL(6,2) NULL
+);
+
+ALTER TABLE TransactionHdr
+ADD CONSTRAINT XPKTransactionHdr PRIMARY KEY (TransactionID);
+
+CREATE TABLE TransactionItem
+(
+	TransactionID        BIGINT NOT NULL,
+	LineNumber           INTEGER NOT NULL,
+	ProdID               INTEGER NULL,
+	StoreID              INTEGER NULL,
+	price                DECIMAL(6,2) NULL,
+	quantity             FLOAT NULL
+);
+
+ALTER TABLE TransactionItem
+ADD CONSTRAINT XPKTransactionItem PRIMARY KEY (TransactionID,LineNumber);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT R_1 FOREIGN KEY (ProdID) REFERENCES products (ProdID);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT R_9 FOREIGN KEY (CatID1) REFERENCES PCat1 (CatID1);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT R_10 FOREIGN KEY (CatID2) REFERENCES PCat2 (CatID2);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT R_11 FOREIGN KEY (CatID3) REFERENCES PCat3 (CatID3);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT R_12 FOREIGN KEY (CatID4) REFERENCES PCat4 (CatID4);
+
+ALTER TABLE ProdCategory
+ADD CONSTRAINT R_13 FOREIGN KEY (CatID5) REFERENCES PCat5 (CatID5);
+
+ALTER TABLE products
+ADD CONSTRAINT R_23 FOREIGN KEY (TransactionID, LineNumber) REFERENCES TransactionItem (TransactionID, LineNumber);
+
+ALTER TABLE Store
+ADD CONSTRAINT R_19 FOREIGN KEY (TransactionID) REFERENCES TransactionHdr (TransactionID);
+
+ALTER TABLE Store
+ADD CONSTRAINT R_21 FOREIGN KEY (TransactionID, LineNumber) REFERENCES TransactionItem (TransactionID, LineNumber);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT R_8 FOREIGN KEY (StoreID) REFERENCES Store (StoreID);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT R_14 FOREIGN KEY (SCatID1) REFERENCES SCat1 (SCatID1);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT R_15 FOREIGN KEY (SCatID2) REFERENCES SCat2 (SCatID2);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT R_16 FOREIGN KEY (SCatID3) REFERENCES SCat3 (SCatID3);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT R_17 FOREIGN KEY (SCatID4) REFERENCES SCat4 (SCatID4);
+
+ALTER TABLE StoreCategory
+ADD CONSTRAINT R_18 FOREIGN KEY (SCatID5) REFERENCES SCat5 (SCatID5);
+
+ALTER TABLE TransactionItem
+ADD CONSTRAINT R_22 FOREIGN KEY (TransactionID) REFERENCES TransactionHdr (TransactionID);
