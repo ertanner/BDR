@@ -8,12 +8,14 @@
 <div class="container">
 
     <header>
+        <p  align="center" >Big Data Rebel  -  Report Builder</p>
         <link href="/css/bdr.css" rel="stylesheet" />
         <ul class="tab">
             <li><a href="#" class="tablinks" onclick="openTab(event, 'ReportType')">Report Type</a></li>
             <li><a href="#" class="tablinks" onclick="openTab(event, 'Products')">Products</a></li>
             <li><a href="#" class="tablinks" onclick="openTab(event, 'Sites')">Sites</a></li>
             <li><a href="#" class="tablinks" onclick="openTab(event, 'Options')">Options</a></li>
+            <li><a href="#" class="tablinks" onclick="openTab(event, 'SQL')">SQL</a></li>
             <li><form name="test" >
                     <input type="button" id="login" value="login" name="b1" onclick='disable_enable(this)'>
                     <input type="button" id="logout" value="logout" name="b2" disabled  onclick='disable_enable(this)'>
@@ -160,7 +162,14 @@
             <h3>Options</h3>
             <p>Options.</p>
         </div>
+        <div id="SQL" class="tabcontent">
+            <h3>SQL</h3>
+            <form name="submitSql" action="/submit" >
+                <textarea cols="120" name="sqlText" wrap="hard">sql text area</textarea>
+                <button type="submit">Go!</button>
+            </form>
 
+        </div>
     </nav>
     <footer>Copyright BDR.com</footer>
 </div>
