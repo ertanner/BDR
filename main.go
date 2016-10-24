@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -12,6 +11,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/gorilla/securecookie"
+
 )
 
 var db *sql.DB
@@ -19,24 +19,27 @@ var cookieHandler = securecookie.New(
 	securecookie.GenerateRandomKey(64),
 	securecookie.GenerateRandomKey(32))
 
-type Store struct {
-	StoreID int
-	Address string
-	City    string
-	Zip     string
-}
-type Prod struct {
-	ProdID   int
-	ProdDesc string
-}
-type PCat struct{
-	PCategory []int
-	PRod []Prod
-}
-type StoreCat struct{
-	SCat []int
-	Stores []Store
-}
+//type Store struct {
+//	StoreID int
+//	Address string
+//	City    string
+//	Zip     string
+//}
+//type Prod struct {
+//	ProdID   int
+//	ProdDesc string
+//}
+//type PCat1 struct{
+//	catID []int
+//	name []string
+//}
+type prodCat1 map[int]string
+
+//type SCat1 struct{
+//	SCat []int
+//	Stores []Store
+//}
+type categorys struct { prodCat []prodCat1}
 
 var tpl *template.Template
 var r = httprouter.New()
@@ -48,12 +51,13 @@ func init(){
 
 
 func main() {
-
+	prodCat1 := make(map[int]string)
 	// Create the database handle, confirm driver is present
 	db, err = sql.Open("mysql", "root:Bambie69@/Transaction")
 	if err != nil {
 		log.Fatalf("Error on initializing database connection: %s", err.Error())
 	}
+	fmt.Println(prodCat1)
 	fmt.Println("db opened at root:****@/Transaction")
 	db.SetMaxIdleConns(100)
 	defer db.Close()
@@ -73,7 +77,7 @@ func main() {
 	r.GET("/articles", SitesHandler)
 	r.GET("/submit" , submit)
 
-	r.GET("/internal/prodCat1", getProdCat1)
+	//r.GET("/internal/prodCat1", getProdCat1)
 	// Create room for static files serving
 	//r.ServeFiles("/node_modules/", http.StripPrefix("/node_modules", http.FileServer(http.Dir("./node_modules"))))
 	r.ServeFiles("/html/*filepath", http.Dir("html"))
@@ -84,35 +88,6 @@ func main() {
 	fmt.Println("router open for business on port 8080")
 	http.ListenAndServe(":8080", r)
 }
-
-func getProdCat1(w http.ResponseWriter, r *http.Request, _ httprouter.Params){
-	var pCat1 string
-	var pCat2 string
-	var pCat3 string
-	var pCat4 string
-	var pCat5 string
-	rows, err := db.Query("SELECT distinct CatID1, CatID2, CatID3, CatID4, CatID5 FROM prodcategory")
-	if err != nil {
-		log.Println("Erorr getting data from prodcategory")
-	}
-
-	for rows.Next() {
-		err := rows.Scan(&pCat1, &pCat2, & pCat3, &pCat4, &pCat5)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(pCat1 + pCat2 + pCat3 + pCat4 + pCat5)
-		//prodCat1 = append(prodCat1, pCat1)
-	}
-	defer rows.Close()
-	err = rows.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
-	//c.JSON(http.StatusOK, pC{""})
-}
-
-
 
 func loginHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	name := r.FormValue("name")
@@ -163,8 +138,15 @@ func SitesHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 func internalPageHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	userName := getUserName(r)
+	var catID string
+	for 1...5 {
+		categorys{}
+		prodCat1 := getProdCat(catID)
+	}
+
+
 	if userName != "" {
-		err = tpl.Execute(w, []string {"a_1", "a&2", "a$3"} )
+		err = tpl.Execute(w, categorys )
 		if err != nil{
 			log.Fatalln(err)
 		}
