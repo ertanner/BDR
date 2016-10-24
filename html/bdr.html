@@ -38,56 +38,56 @@
             <h3>Products</h3>
             <table >
                 <tr>
-                    <td align="center">
+                    <td align="center" width="200">
                         <p>Products</p>
-                        <select size="15" multiple >
-                            {{range .}}
-                            <option value="{{.}}"> {{.}}</option>
+                        <select size="50"  multiple >
+                            {{range $key, $value := .}}
+                            <option value="{{$key}}"> {{$value}}</option>
                             {{else}}
                             <option></option>
                             {{end}}
                         </select>
                     </td>
                     <td></td>
-                    <td align="center">
+                    <td align="center" width="200">
                         <p>Attribute 1</p>
-                        <select size="15" multiple>
+                        <select size="50" multiple>
                             <option>Att 1</option>
                             <option>Att 2</option>
                             <option>Att 3</option>
                         </select>
                     </td >
                     <td></td>
-                    <td align="center">
+                    <td align="center" width="200">
                         <p>Attribute 2</p>
-                        <select size="15" multiple>
+                        <select size="50" multiple>
                             <option>Att 1</option>
                             <option>Att 2</option>
                             <option>Att 3</option>
                         </select>
                     </td >
                     <td></td>
-                    <td align="center">
+                    <td align="center" width="200">
                         <p>Attribute 3</p>
-                        <select size="15" multiple>
+                        <select size="50" multiple>
                             <option>Att 1</option>
                             <option>Att 2</option>
                             <option>Att 3</option>
                         </select>
                     </td>
                     <td></td>
-                    <td align="center">
+                    <td align="center" width="200">
                         <p>Attribute 4</p>
-                        <select size="15" multiple>
+                        <select size="50" multiple>
                             <option>Att 1</option>
                             <option>Att 2</option>
                             <option>Att 3</option>
                         </select>
                     </td>
                     <td></td>
-                    <td align="center">
+                    <td align="center" width="200">
                         <p>Attribute 5</p>
-                        <select size="15" multiple>
+                        <select size="50"  multiple>
                             <option>Att 1</option>
                             <option>Att 2</option>
                             <option>Att 3</option>
@@ -159,8 +159,14 @@
         </div>
 
         <div id="Options" class="tabcontent">
-            <h3>Options</h3>
-            <p>Options.</p>
+            <p>Options <textarea >Options</textarea></p>
+            <p>Report Type (P, B or T)<textarea >P</textarea ></p>
+            <p>Date Start<textarea >1/1/1990</textarea ></p>
+            <p>Date End<textarea >today</textarea ></p>
+            <p>Sales Type Code (R -  Clearance)<textarea >R</textarea ></p>
+            <p>Min Basket Amount<textarea ></textarea ></p>
+            <p>Min Item Amount<textarea ></textarea ></p>
+            <p>Item Codes to ignore<textarea ></textarea ></p>
         </div>
         <div id="SQL" class="tabcontent">
             <h3>SQL</h3>
