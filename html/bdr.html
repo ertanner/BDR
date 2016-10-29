@@ -4,93 +4,139 @@
 <html>
 
 <body>
-
+<div>
+<h2 align="center" >Big Data Rebel</h2><h4 align="right"><a href="http://localhost:8080/index"  >logout</a></h4>
+</div>
 <div class="container">
 
     <header>
-        <p  align="center" >Big Data Rebel  -  Report Builder</p>
         <link href="/css/bdr.css" rel="stylesheet" />
+
         <ul class="tab">
             <li><a href="#" class="tablinks" onclick="openTab(event, 'ReportType')">Report Type</a></li>
             <li><a href="#" class="tablinks" onclick="openTab(event, 'Products')">Products</a></li>
             <li><a href="#" class="tablinks" onclick="openTab(event, 'Sites')">Sites</a></li>
             <li><a href="#" class="tablinks" onclick="openTab(event, 'Options')">Options</a></li>
-            <li><a href="#" class="tablinks" onclick="openTab(event, 'SQL')">SQL</a></li>
-            <li><form name="test" >
-                    <input type="button" id="login" value="login" name="b1" onclick='disable_enable(this)'>
-                    <input type="button" id="logout" value="logout" name="b2" disabled  onclick='disable_enable(this)'>
-                </form>
-            </li>
+
         </ul>
     </header>
 
     <nav>
+        <form name="submitSql" action="/submit" >
+
         <div id="ReportType" class="tabcontent">
             <h3>Report Type</h3>
             <form>
-                <input type="radio" name="report">Product Penetration<br>
-                <input type="radio" name="report">Profitablity<br>
-                <input type="radio" name="report">Commonly sold together (apriori)<br>
+                Product Penetration Report<br>
+                <input type="radio" name="rptType" value="prodPenTopRpt">Top 50%<br>
+                <input type="radio" name="rptType" value="prodPenBotRpt">Bottom 50%<br>
+                <input type="radio" name="rptType" value="prodPenAllRpt">All<br><br>
+
+                Product Profit Report<br>
+                <input type="radio" name="rptType" value="prodProfTopRpt">Top 1/3<br>
+                <input type="radio" name="rptType" value="prodProfBotRpt">Bottom 1/3<br>
+                <input type="radio" name="rptType" value="prodProfAllRpt">Middle 1/3<br><br>
+
+                Other Reports<br>
+                <input type="radio" name="rptType" value="apriori">Frequently Purchased With<br>
+                <input type="radio" name="rptType" value="season">Seasonality<br>
+                <input type="radio" name="rptType" value="sold">Promotional Lift (needs seasonality first)<br>
             </form>
+
         </div>
 
         <div id="Products" class="tabcontent">
             <h3>Products</h3>
             <table >
                 <tr>
-                    <td align="center" width="200">
+                    <td align="center">
                         <p>Products</p>
-                        <select size="50"  multiple >
-                            {{range $key, $value := .}}
+                        <select size="15" name="pCat1" multiple >
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 0 }}
+                            {{range $key, $value := $elmt}}
                             <option value="{{$key}}"> {{$value}}</option>
                             {{else}}
                             <option></option>
                             {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
-                    <td></td>
-                    <td align="center" width="200">
+                    <td align="center">
                         <p>Attribute 1</p>
-                        <select size="50" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="15" name="pCat2" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 1 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td >
-                    <td></td>
-                    <td align="center" width="200">
+                    <td align="center">
                         <p>Attribute 2</p>
-                        <select size="50" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="15" name="pCat3" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 2 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td >
-                    <td></td>
-                    <td align="center" width="200">
+                    <td align="center">
                         <p>Attribute 3</p>
-                        <select size="50" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="15" name="pCat4" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 3 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
-                    <td></td>
-                    <td align="center" width="200">
+                    <td align="center">
                         <p>Attribute 4</p>
-                        <select size="50" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="15" name="pCat5" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 4 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
-                    <td></td>
-                    <td align="center" width="200">
+                    <td align="center">
                         <p>Attribute 5</p>
-                        <select size="50"  multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="15" name="pCat6" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 5 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
                 </tr>
@@ -103,55 +149,92 @@
                 <tr>
                     <td align="center">
                         <p>Sites</p>
-                        <select size="15" multiple >
-                            <option value="site 1"> me</option>
-                            <option value="site2"> myself</option>
-                            <option value="site3"> wife</option>
+                        <select size="20" name="sCat1" multiple >
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 6 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
-                    <td></td>
                     <td align="center">
                         <p>Region 1</p>
-                        <select size="15" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="20" name="sCat2" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 7 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td >
-                    <td></td>
                     <td align="center">
                         <p>Region 2</p>
-                        <select size="15" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="20" name="sCat3" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 8 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td >
-                    <td></td>
                     <td align="center">
                         <p>Region 3</p>
-                        <select size="15" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="20" name="sCat4" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 9 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
-                    <td></td>
                     <td align="center">
                         <p>Region 4</p>
-                        <select size="15" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="20" name="sCat5" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 10 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
-                    <td></td>
                     <td align="center">
                         <p>Region 5</p>
-                        <select size="15" multiple>
-                            <option>Att 1</option>
-                            <option>Att 2</option>
-                            <option>Att 3</option>
+                        <select size="20" name="sCat6" multiple>
+                            {{range $index, $elmt := .}}
+                            {{$index}}
+                            {{if eq $index 11 }}
+                            {{range $key, $value := $elmt}}
+                            <option value="{{$key}}"> {{$value}}</option>
+                            {{else}}
+                            <option></option>
+                            {{end}}
+                            {{end}}
+                            {{end}}
                         </select>
                     </td>
                 </tr>
@@ -159,26 +242,54 @@
         </div>
 
         <div id="Options" class="tabcontent">
-            <p>Options <textarea >Options</textarea></p>
-            <p>Report Type (P, B or T)<textarea >P</textarea ></p>
-            <p>Date Start<textarea >1/1/1990</textarea ></p>
-            <p>Date End<textarea >today</textarea ></p>
-            <p>Sales Type Code (R -  Clearance)<textarea >R</textarea ></p>
-            <p>Min Basket Amount<textarea ></textarea ></p>
-            <p>Min Item Amount<textarea ></textarea ></p>
-            <p>Item Codes to ignore<textarea ></textarea ></p>
+            <table>
+                <tr>
+                    <td>Date Start</td>
+                    <td><input type="dateStart" name="dateStart"> formated mm/dd/yyyy</td>
+                </tr>
+                <tr>
+                    <td>Date end</td>
+                    <td><input type="dateEnd" name="dateEnd"> formated mm/dd/yyyy</td>
+                </tr>
+                <tr>
+                    <td>Ignore Sales Type Codes </td>
+                    <td><input type="clrc" name="clrc"> i.e. (R -  Clearance)</td>
+                </tr>
+                <tr>
+                    <td>Item Codes to ignore</td>
+                    <td><input type="itemIgnore" name="itemIgnore">Comma separated</td>
+                </tr>
+                <tr>
+                    <td>Basket Amount > than</td>
+                    <td><input type="text" name="amtGTbasket"> numeric only</td>
+                </tr>
+                <tr>
+                    <td>Basket Amount < than </td>
+                    <td><input type="text" name="amtLTbasket">numeric only</td>
+                </tr>
+                <tr>
+                    <td>Item Amount > than </td>
+                    <td><input type="text" name="amtGTitem">numeric only</td>
+                </tr>
+                <tr>
+                    <td>Item Amount < than </td>
+                    <td><input type="text" name="amtLTitem">numeric only</td>
+                </tr>
+            </table>
         </div>
+
         <div id="SQL" class="tabcontent">
             <h3>SQL</h3>
-            <form name="submitSql" action="/submit" >
+
                 <textarea cols="120" name="sqlText" wrap="hard">sql text area</textarea>
-                <button type="submit">Go!</button>
-            </form>
 
         </div>
+
+            <button type="submit">Go!</button>
+        </form>
     </nav>
+
     <footer>Copyright BDR.com</footer>
 </div>
-
 </body>
 </html>

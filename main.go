@@ -13,37 +13,15 @@ import (
 	"github.com/gorilla/securecookie"
 
 )
-
 var db *sql.DB
 var cookieHandler = securecookie.New(
 	securecookie.GenerateRandomKey(64),
 	securecookie.GenerateRandomKey(32))
 
-//type Store struct {
-//	StoreID int
-//	Address string
-//	City    string
-//	Zip     string
-//}
-//type Prod struct {
-//	ProdID   int
-//	ProdDesc string
-//}
-//type PCat1 struct{
-//	catID []int
-//	name []string
-//}
-type prodCat1 map[int]string
-
-//type SCat1 struct{
-//	SCat []int
-//	Stores []Store
-//}
-type categorys struct { prodCat []prodCat1}
-
 var tpl *template.Template
 var r = httprouter.New()
 var err error
+
 
 func init(){
 	tpl = template.Must(template.ParseGlob("html/*.html"))
@@ -120,7 +98,7 @@ fmt.Fprintf(w, indexPage)
 
 func HomeHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var msg string
-	err := db.QueryRow("SELECT prodDesc FROM prod WHERE prodID=?", "1").Scan(&msg)
+	err := db.QueryRow("SELECT prodDesc FROM products WHERE prodID=?", "1").Scan(&msg)
 	if err != nil {
 		log.Println(err)
 	fmt.Fprintf(w, "Database Error!")
@@ -135,29 +113,39 @@ func ProductsHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params
 func SitesHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 }
-
 func internalPageHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	userName := getUserName(r)
-	var catID string
-	for 1...5 {
-		categorys{}
-		prodCat1 := getProdCat(catID)
-	}
 
+	var cat = [12]map[string]string{}
+	//var store = [6]map[string]string{}
+	//var dim = make(map[int][]string)
+
+	//var categories = ([]prod, []store,)
+	cat[0] = getCat("pCat1")
+	cat[1] = getCat("pCat2")
+	cat[2] = getCat("pCat3")
+	cat[3] = getCat("pCat4")
+	cat[4] = getCat("pCat5")
+	cat[5] = getCat("pCat6")
+	cat[6] = getCat("sCat1")
+	cat[7] = getCat("sCat2")
+	cat[8] = getCat("sCat3")
+	cat[9] = getCat("sCat4")
+	cat[10] = getCat("sCat5")
+	cat[11] = getCat("sCat6")
 
 	if userName != "" {
-		err = tpl.Execute(w, categorys )
-		if err != nil{
-			log.Fatalln(err)
-		}
-		//err := db.Query("select ")
+		err = tpl.ExecuteTemplate(w, "bdr.html", cat)
+		if err != nil{log.Fatalln(err)}
 	} else {
 		http.Redirect(w, r, "/", 302)
 	}
-
 }
 
+
 const indexPage = `
+<h1 align="center">Big Data Rebel</h1><br>
+
 <h1>Login</h1>
 <form method="post" action="/login">
      <label for="name">User name</label>

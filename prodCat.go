@@ -2,17 +2,17 @@ package main
 
 import (
 	"log"
-	"fmt"
 	"strconv"
 )
 
-func getProdCat(id string) map[int]string {
+func getCat(cat string) (map[string] string){
 	var ID int
 	var Name string
-	prodCat1 := make(map[int]string)
-	rows, err := db.Query("SELECT distinct CatID" +id+ ", Name FROM pcat"+id)
+
+	pCat := make(map[string]string)
+	rows, err := db.Query("SELECT distinct ID, Name FROM " + cat)
 	if err != nil {
-		log.Println("Erorr getting PCat" + id)
+		log.Println("Erorr getting " + cat)
 	}
 
 	for rows.Next() {
@@ -20,16 +20,12 @@ func getProdCat(id string) map[int]string {
 		if err != nil {
 			log.Fatal(err)
 		}
-		prodCat1[ID] = Name
+		pCat[ strconv.Itoa(ID)] = Name
 	}
 	defer rows.Close()
 	err = rows.Err()
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	for k, v := range prodCat1{
-		fmt.Println( strconv.Itoa(k),v)
-	}
-	return prodCat1
+	return pCat
 }
