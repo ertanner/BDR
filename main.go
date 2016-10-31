@@ -77,7 +77,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		err := db.QueryRow("SELECT userName FROM user WHERE userName=? and userPwd=?", name, pass).Scan(&msg)
 		if err != nil {
 			log.Println(err)
-			redirectTarget = "/login"
+			redirectTarget = "/index"
 			http.Redirect(w, r, redirectTarget, 302)
 
 		}else {
