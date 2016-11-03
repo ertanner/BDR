@@ -196,6 +196,6 @@ func clearSession(response http.ResponseWriter) {
 func submit(w http.ResponseWriter, r *http.Request, _ httprouter.Params)  {
 	fmt.Println(r)
 
-
+	seasonality()
 }
 
