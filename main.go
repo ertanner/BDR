@@ -63,7 +63,7 @@ func main() {
 	r.ServeFiles("/ts/*filepath", http.Dir("ts"))
 	r.ServeFiles("/css/*filepath", http.Dir("css"))
 
-	fmt.Println("router open for business on port 8080")
+	fmt.Println("router open for business on port 9080")
 	http.ListenAndServe(":9080", r)
 }
 
@@ -89,7 +89,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 func logoutHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	clearSession(w)
-	http.Redirect(w, r, "/", 302)
+	http.Redirect(w, r, "/login", 302)
 }
 
 func indexPageHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
