@@ -5,7 +5,7 @@ import "testing"
 
 func TestHello(t *testing.T){
 	expected := "Hello Go!"
-	actual := hello()
+	actual := "hi"
 	if actual != expected {
 		t.Error("Test failed")
 	}
